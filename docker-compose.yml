@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  postgres:
+    image: postgres:9.4
+    environment:
+      - POSTGRES_USER=kong
+      - POSTGRES_DB=kong
+  kong:
+    image: kong:latest
+    ports:
+      - "8000:8000"
+      - "8001:8001"
+    environment:
+      - "KONG_TRUSTED_IPS=0.0.0.0/0,::/0"
+      - "KONG_PROXY_LISTEN=0.0.0.0:8000"
+      - "KONG_PROXY_LISTEN_SSL=0.0.0.0:8443"
+      - "KONG_ADMIN_LISTEN=0.0.0.0:8001"
+      - KONG_DATABASE=postgres
+      - KONG_PG_HOST=postgres
+      - KONG_PG_DATABASE=kong
+      - KONG_PG_USER=kong
+      - KONG_PG_PASSWORD=kong
+

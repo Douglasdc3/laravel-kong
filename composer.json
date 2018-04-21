@@ -1,0 +1,47 @@
+{
+    "name": "douglasdc3/kong",
+    "description": "A Kong API Manager Admin client. Includes Laravel integration.",
+    "version": "0.1.2",
+    "keywords": [
+        "laravel",
+        "kong",
+        "gateway",
+        "api"
+    ],
+    "type": "library",
+    "authors": [
+        {
+            "name": "Ken Andries",
+            "email": "ken.andries.1992@gmail.com"
+        }
+    ],
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "DouglasDC3\\Kong\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^7.0",
+        "guzzlehttp/guzzle": "^6.0",
+        "illuminate/contracts": "~5.6.0",
+        "illuminate/support": "~5.6.0"
+
+    },
+    "require-dev": {
+        "mockery/mockery": "^1.0",
+        "phpunit/phpunit": "^6.5 || ^7.0",
+        "symfony/var-dumper": "^4.0"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "DouglasDC3\\Kong\\KongServiceProvider"
+            ]
+        }
+    }
+}
