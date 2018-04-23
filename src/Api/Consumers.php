@@ -56,7 +56,7 @@ class Consumers extends KongApi
      */
     public function update(Consumer $consumer)
     {
-        return new Consumer($this->kong->getClient()->patch("consumers/$consumer->id", $consumer->toArray()), $this->kong);
+        return new Consumer($this->kong->getClient()->put('consumers', $consumer->toArray()), $this->kong);
     }
 
     /**
