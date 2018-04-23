@@ -54,7 +54,7 @@ class Consumers extends KongApi
      * @return \DouglasDC3\Kong\Model\Consumer
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function patch(Consumer $consumer)
+    public function update(Consumer $consumer)
     {
         return new Consumer($this->kong->getClient()->patch("consumers/$consumer->id", $consumer->toArray()), $this->kong);
     }

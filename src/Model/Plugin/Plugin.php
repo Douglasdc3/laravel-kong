@@ -12,6 +12,7 @@ abstract class Plugin implements Arrayable
     public $name;
     public $service_id;
     public $route_id;
+    public $created_at;
 
     /**
      * Plugin constructor.
@@ -22,11 +23,7 @@ abstract class Plugin implements Arrayable
     public function __construct($name, $data)
     {
         $this->name = $name;
-        foreach ($data as $key => $value) {
-            if (property_exists($this, $key)) {
-                $this->$key = $value;
-            }
-        }
+        $this->setData($data);
     }
 
 
@@ -55,7 +52,20 @@ abstract class Plugin implements Arrayable
             'name' => $this->name,
             'service_id' => $this->service_id,
             'route_id' => $this->route_id,
+            'created_at' => $this->created_at,
             'config' => $this->configArray(),
         ];
+    }
+
+    /**
+     * @param $data
+     */
+    public function setData($data)
+    {
+        foreach ($data as $key => $value) {
+            if (property_exists($this, $key)) {
+                $this->$key = $value;
+            }
+        }
     }
 }

@@ -5,14 +5,11 @@ namespace DouglasDC3\Kong\Model\Plugin;
 use DouglasDC3\Kong\Kong;
 use Illuminate\Contracts\Support\Arrayable;
 
-class JwtConsumer implements Arrayable
+class KeyAuthConsumer implements Arrayable
 {
     public $id;
-    public $algorithm;
     public $key;
-    public $secret;
     public $consumer_id;
-    public $rsa_public_key;
     public $created_at;
     /**
      * @var \DouglasDC3\Kong\Kong
@@ -20,7 +17,7 @@ class JwtConsumer implements Arrayable
     private $kong;
 
     /**
-     * Jwt constructor.
+     * KeyAuthConsumer constructor.
      *
      * @param array                 $data
      * @param \DouglasDC3\Kong\Kong $kong
@@ -44,11 +41,8 @@ class JwtConsumer implements Arrayable
     {
         return [
             'id' => $this->id,
-            'algorithm' => $this->algorithm,
             'key' => $this->key,
-            'secret' => $this->secret,
             'consumer_id' => $this->consumer_id,
-            'rsa_public_key' => $this->rsa_public_key,
             'created_at' => $this->created_at,
         ];
     }

@@ -54,7 +54,7 @@ class Services extends KongApi
      * @return \DouglasDC3\Kong\Model\Service
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function patch(Service $service)
+    public function update(Service $service)
     {
         return new Service($this->kong->getClient()->patch("services/$service->id", $service->toArray()), $this->kong);
     }

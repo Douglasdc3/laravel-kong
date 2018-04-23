@@ -62,6 +62,20 @@ class HttpClient
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
+    public function put($url, $body = [], $headers = [], $query = [])
+    {
+        return $this->request('PUT', $url, $query, $body, $headers);
+    }
+
+    /**
+     * @param       $url
+     * @param array $body
+     * @param array $headers
+     * @param array $query
+     *
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function patch($url, $body = [], $headers = [], $query = [])
     {
         return $this->request('PATCH', $url, $query, $body, $headers);

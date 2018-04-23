@@ -2,13 +2,11 @@
 
 namespace DouglasDC3\Kong\Model\Plugin;
 
-class JwtPlugin extends Plugin
+class KeyAuthPlugin extends Plugin
 {
-    public $uri_param_names = [];
-    public $cookie_names = [];
-    public $claims_to_verify = ['exp'];
-    public $key_claim_name = 'iss';
-    public $secret_is_base64 = false;
+    public $key_names = [];
+    public $key_in_body = false;
+    public $hide_credentials = false;
     public $anonymous;
     public $run_on_preflight = true;
 
@@ -19,7 +17,7 @@ class JwtPlugin extends Plugin
      */
     public function __construct($data = [])
     {
-        parent::__construct('jwt', $data);
+        parent::__construct('key-auth', $data);
 
         $data = $data['config'] ?? $data;
 
@@ -31,11 +29,9 @@ class JwtPlugin extends Plugin
     protected function configArray()
     {
         return [
-            'uri_param_names' => $this->uri_param_names,
-            'cookie_names' => $this->cookie_names,
-            'claims_to_verify' => $this->claims_to_verify,
-            'key_claim_name' => $this->key_claim_name,
-            'secret_is_base64' => $this->secret_is_base64,
+            'key_names' => $this->key_names,
+            'key_in_body' => $this->key_in_body,
+            'hide_credentials' => $this->hide_credentials,
             'anonymous' => $this->anonymous,
             'run_on_preflight' => $this->run_on_preflight,
         ];

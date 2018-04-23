@@ -23,7 +23,7 @@ class AclConsumer implements Arrayable
      * @param array                 $data
      * @param \DouglasDC3\Kong\Kong $kong
      */
-    public function __construct($data, Kong $kong = null)
+    public function __construct($data = [], Kong $kong = null)
     {
         $this->kong = $kong;
 

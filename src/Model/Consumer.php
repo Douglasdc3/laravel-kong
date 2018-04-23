@@ -4,6 +4,7 @@ namespace DouglasDC3\Kong\Model;
 
 use DouglasDC3\Kong\Api\Plugin\Acl;
 use DouglasDC3\Kong\Api\Plugin\Jwt;
+use DouglasDC3\Kong\Api\Plugin\KeyAuth;
 use DouglasDC3\Kong\Kong;
 use Illuminate\Contracts\Support\Arrayable;
 
@@ -72,6 +73,16 @@ class Consumer implements Arrayable
     public function acl()
     {
         return new Acl($this->kong, $this);
+    }
+
+    /**
+     * Keys associated with this consumer.
+     *
+     * @return \DouglasDC3\Kong\Api\Plugin\KeyAuth
+     */
+    public function keyAuth()
+    {
+        return new KeyAuth($this->kong, $this);
     }
 
     /**

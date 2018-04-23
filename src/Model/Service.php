@@ -3,11 +3,13 @@
 namespace DouglasDC3\Kong\Model;
 
 use DouglasDC3\Kong\Api\Plugins;
+use DouglasDC3\Kong\Api\Routes;
 use DouglasDC3\Kong\Kong;
 use Illuminate\Contracts\Support\Arrayable;
 
 class Service implements Arrayable
 {
+    public $id;
     public $name;
     public $protocol = 'http';
     public $host;
@@ -25,17 +27,14 @@ class Service implements Arrayable
 
     /**
      * Service constructor.
+     *
+     * @param                            $data
+     * @param \DouglasDC3\Kong\Kong|null $kong
      */
-    public function __construct($data, Kong $kong)
+    public function __construct($data, Kong $kong = null)
     {
         if (is_string($data)) {
-            $matches = [];
-            preg_match('/(https?)(?:\:\/\/)([A-z\.]*)(.*)/', $data, $matches);
-
-            $this->protocol = $matches[1];
-            $this->host = $matches[2];
-            $this->path = $matches[3];
-
+            $this->setUri($data);
             return;
         }
 
@@ -46,11 +45,38 @@ class Service implements Arrayable
     }
 
     /**
-     * @return
+     * @param string $uri
+     */
+    public function setUri($uri)
+    {
+        $matches = [];
+        preg_match('/(https?):\/\/([A-z0-9\.]*)(:?[0-9]*)(.*)/', $uri, $matches);
+
+        $this->protocol = $matches[1];
+        $this->host = $matches[2];
+        $this->port = empty($matches[3]) ? 80 : (int)ltrim($matches[3], ':');
+        $this->path = '/' . ltrim($matches[4], '/');
+    }
+
+
+    /**
+     * Plugins associated with the given service.
+     *
+     * @return \DouglasDC3\Kong\Api\Plugins
      */
     public function plugins()
     {
         return new Plugins($this->kong, $this);
+    }
+
+    /**
+     * Routes associated with the given service.
+     *
+     * @return \DouglasDC3\Kong\Api\Routes
+     */
+    public function routes()
+    {
+        return new Routes($this->kong, $this);
     }
 
 
@@ -71,6 +97,17 @@ class Service implements Arrayable
      */
     public function toArray()
     {
-        return get_object_vars($this);
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'protocol' => $this->protocol,
+            'host' => $this->host,
+            'port' => $this->port,
+            'path' => $this->path,
+            'retries' => $this->retries,
+            'connect_timeout' => $this->connect_timeout,
+            'write_timeout' => $this->write_timeout,
+            'read_timeout' => $this->read_timeout,
+        ];
     }
 }

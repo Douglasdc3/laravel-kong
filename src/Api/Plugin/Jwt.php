@@ -3,7 +3,7 @@
 namespace DouglasDC3\Kong\Api\Plugin;
 
 use DouglasDC3\Kong\Api\KongApi;
-use DouglasDC3\Kong\Model\Plugin\JwtConsumer as JwtModel;
+use DouglasDC3\Kong\Model\Plugin\JwtConsumer;
 
 class Jwt extends KongApi
 {
@@ -30,12 +30,12 @@ class Jwt extends KongApi
     /**
      * List all JWT tokens
      *
-     * @return JwtModel[]|\Illuminate\Support\Collection
+     * @return JwtConsumer[]|\Illuminate\Support\Collection
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function list()
     {
-        return $this->listCall("consumers/{$this->consumer->id}/jwt", JwtModel::class, []);
+        return $this->listCall("consumers/{$this->consumer->id}/jwt", JwtConsumer::class, []);
     }
 
     /**
@@ -48,7 +48,7 @@ class Jwt extends KongApi
      */
     public function find($id)
     {
-        return new JwtModel($this->kong->getClient()->get("consumers/{$this->consumer->id}/jwt/$id"), $this->kong);
+        return new JwtConsumer($this->kong->getClient()->get("consumers/{$this->consumer->id}/jwt/$id"), $this->kong);
     }
 
     /**
@@ -64,15 +64,16 @@ class Jwt extends KongApi
      */
     public function create($key = null, $algo = 'HS256', $secret = null, $rsa = null)
     {
-        if (!($key instanceof JwtModel)) {
-            $key = new JwtModel([
+        if (!($key instanceof JwtConsumer)) {
+            $key = new JwtConsumer([
                 'key' => $key,
                 'algorithm' => $algo,
                 'secret' => $secret,
                 'rsa_public_key' => $rsa,
+                'consumer_id' => $this->consumer->id,
             ]);
         }
 
-        return new JwtModel($this->kong->getClient()->post("consumers/{$this->consumer->id}/jwt", $key->toArray()), $this->kong);
+        return new JwtConsumer($this->kong->getClient()->post("consumers/{$this->consumer->id}/jwt", $key->toArray()), $this->kong);
     }
 }

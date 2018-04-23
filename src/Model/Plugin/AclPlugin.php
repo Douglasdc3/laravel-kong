@@ -12,7 +12,7 @@ class AclPlugin extends Plugin
      *
      * @param $data
      */
-    public function __construct($data)
+    public function __construct($data = [])
     {
         parent::__construct('acl', $data);
 

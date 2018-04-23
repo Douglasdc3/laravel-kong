@@ -3,7 +3,9 @@
 namespace DouglasDC3\Kong\Api;
 
 use DouglasDC3\Kong\Kong;
+use DouglasDC3\Kong\Model\Plugin\AclPlugin;
 use DouglasDC3\Kong\Model\Plugin\JwtPlugin;
+use DouglasDC3\Kong\Model\Plugin\KeyAuthPlugin;
 use DouglasDC3\Kong\Model\Plugin\Plugin;
 
 class Plugins extends KongApi
@@ -12,6 +14,12 @@ class Plugins extends KongApi
      * @var null
      */
     private $parent;
+
+    private static $mapping = [
+        'acl' => AclPlugin::class,
+        'jwt' => JwtPlugin::class,
+        'key-auth' => KeyAuthPlugin::class,
+    ];
 
     /**
      * Plugins constructor.
@@ -53,6 +61,21 @@ class Plugins extends KongApi
     }
 
     /**
+     * @param \DouglasDC3\Kong\Model\Plugin\Plugin $plugin
+     *
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function update(Plugin $plugin)
+    {
+        $plugin->setParent($this->parent);
+
+        $class = get_class($plugin);
+
+        return new $class($this->kong->getClient()->put('plugins', $plugin->toArray()));
+    }
+
+    /**
      * @param $id
      *
      * @return bool
@@ -60,7 +83,7 @@ class Plugins extends KongApi
      */
     public function delete($id)
     {
-        return $this->deleteCall($this->buildUrl() . '/' . $id);
+        return $this->deleteCall("plugins/$id");
     }
 
     private function buildUrl()
@@ -70,8 +93,8 @@ class Plugins extends KongApi
 
     private function mapPlugin($item)
     {
-        if ($item['name'] === 'jwt') {
-            return new JwtPlugin($item);
+        if (self::$mapping[$item['name']] ?? false) {
+            return new self::$mapping[$item['name']]($item);
         }
 
         return $item;

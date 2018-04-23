@@ -54,7 +54,7 @@ class Certificates extends KongApi
      * @return \DouglasDC3\Kong\Model\Certificate
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function patch(Certificate $certificate)
+    public function update(Certificate $certificate)
     {
         return new Certificate($this->kong->getClient()->patch("certificates/$certificate->id", $certificate->toArray()), $this->kong);
     }

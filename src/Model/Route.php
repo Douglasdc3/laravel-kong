@@ -24,7 +24,7 @@ class Route implements Arrayable
      */
     private $kong;
 
-    public function __construct(array $data = [], Kong $kong)
+    public function __construct(array $data = [], Kong $kong = null)
     {
         foreach ($data as $key => $value) {
             if ($key == 'service') continue;
