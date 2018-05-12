@@ -67,4 +67,27 @@ class Acl extends KongApi
 
         return new AclConsumer($this->kong->getClient()->post("consumers/{$this->consumer->id}/acls", $acl->toArray()), $this->kong);
     }
+
+    /**
+     * Remove an ACL permission.
+     *
+     * @param string|AclConsumer $acl
+     *
+     * @return bool
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function delete($acl)
+    {
+        if (!($acl instanceof AclConsumer)) {
+            $acl = $this->list()->filter(function ($aclConsumer) use ($acl) {
+                return $aclConsumer->group === $acl;
+            })->first();
+        }
+
+        if (!$acl) {
+            return false;
+        }
+
+        return $this->kong->getClient()->delete("consumers/{$this->consumer->id}/acls/{$acl->id}")->getStatusCode() < 300;
+    }
 }
