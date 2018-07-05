@@ -7,6 +7,8 @@ use GuzzleHttp\Client;
 class HttpClient
 {
     /**
+     * Request options.
+     *
      * @var array
      */
     private $options;
@@ -14,24 +16,26 @@ class HttpClient
     /**
      * HttpClient constructor.
      *
-     * @param string $baseUrl
-     * @param array  $options
+     * @param string $baseUrl Protocol, Port and base path.
+     * @param array  $options Guzzle options array
      */
     public function __construct(string $baseUrl, array $options = [])
     {
         $this->options = $options;
 
-        $this->client = new Client([
+        $this->client = new Client(array_merge($options, [
             'base_uri' => $baseUrl
-        ]);
+        ]));
     }
 
     /**
-     * @param       $url
-     * @param array $query
-     * @param array $headers
+     * Get resource.
      *
-     * @return mixed
+     * @param string $url The resource path.
+     * @param array  $query Optional query params.
+     * @param array  $headers Optional headers.
+     *
+     * @return array Json response.
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function get($url, $query = [], $headers = [])
@@ -40,71 +44,69 @@ class HttpClient
     }
 
     /**
-     * @param       $url
-     * @param array $body
-     * @param array $headers
-     * @param array $query
+     * Post Resource.
      *
-     * @return mixed
+     * @param string $url The resource path.
+     * @param array  $body Post parameters.
+     * @param array  $query Optional query params.
+     * @param array  $headers Optional headers.
+     *
+     * @return array Json response.
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function post($url, $body = [], $headers = [], $query = [])
+    public function post($url, $body = [], $query = [], $headers = [])
     {
         return $this->request('POST', $url, $query, $body, $headers);
     }
 
     /**
-     * @param       $url
-     * @param array $body
-     * @param array $headers
-     * @param array $query
+     * Put resource.
      *
-     * @return mixed
+     * @param string $url The resource path.
+     * @param array  $body Post parameters.
+     * @param array  $query Optional query params.
+     * @param array  $headers Optional headers.
+     *
+     * @return array Json response.
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function put($url, $body = [], $headers = [], $query = [])
+    public function put($url, $body = [], $query = [], $headers = [])
     {
         return $this->request('PUT', $url, $query, $body, $headers);
     }
 
     /**
-     * @param       $url
-     * @param array $body
-     * @param array $headers
-     * @param array $query
+     * Patch resource.
      *
-     * @return mixed
+     * @param string $url The resource path.
+     * @param array  $body Post parameters.
+     * @param array  $query Optional query params.
+     * @param array  $headers Optional headers.
+     *
+     * @return array Json response.
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function patch($url, $body = [], $headers = [], $query = [])
+    public function patch($url, $body = [], $query = [], $headers = [])
     {
         return $this->request('PATCH', $url, $query, $body, $headers);
     }
 
     /**
-     * @param       $url
-     * @param array $body
-     * @param array $headers
-     * @param array $query
+     * Delete resource.
+     *
+     * @param string $url The resource path.
+     * @param array  $body Post parameters.
+     * @param array  $query Optional query params.
+     * @param array  $headers Optional headers.
      *
      * @return \GuzzleHttp\Psr7\Response
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function delete($url, $body = [], $headers = [], $query = [])
+    public function delete($url, $body = [], $query = [], $headers = [])
     {
         return $this->request('DELETE', $url, $query, $body, $headers, false);
     }
 
-    /**
-     * @param       $verb
-     * @param       $url
-     * @param array $query
-     * @param array $body
-     * @param array $headers
-     *
-     * @return array|\GuzzleHttp\Psr7\Response
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     */
     private function request($verb, $url, $query = [], $body = [], $headers = [], $json = true)
     {
         if (! empty($body)) {
