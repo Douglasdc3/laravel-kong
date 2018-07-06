@@ -4,10 +4,10 @@ This is laravel package that allows you to integrate with [kong](https://getkong
 
 # Install
 
-This package requires PHP7 and Laravel5.6 or higher.
+This package requires PHP7.X and Laravel5.6 or higher.
 
 ```bash
-composer required douglasdc3/kong
+composer require douglasdc3/kong
 ```
 
 # Usage
@@ -27,19 +27,10 @@ $kong->consumers()->create($consumer)->acl()->create('admin');
 
 * Missing plugins.
 * More tests.
-* Documentation.
 
 # Testing & local development
 
-Starting a local kong instance
-
-```bash
-docker-compose up -d postgres
-# The first time you need to run the database migrations
-docker-compose run --rm kong kong migrations up
-docker-compose up -d kong
-```
-
+The integration test use docker behind the scenes.
 Run the tests with:
 
 ```bash
