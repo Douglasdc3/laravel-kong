@@ -1,51 +1,44 @@
 <?php
 
+use DouglasDC3\Kong\Kong;
+use DouglasDC3\Kong\Http\HttpClient;
+
 class KongTest extends \PHPUnit\Framework\TestCase
 {
     protected $kong;
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->kong = new Kong(new HttpClient('http://localhost:8001'));
     }
 
-    protected function runTest()
+    public static function setUpBeforeClass()
     {
-        $exception = null;
-
-        $this->startKong();
-
-        try {
-            $result = parent::runTest();
-        } catch (Throwable $ex) {
-            $exception = $ex;
-        }
-
-        $this->stopKong();
-
-        if ($exception) {
-            throw $exception;
-        }
-
-        return $result;
+        static::startKong();
     }
 
-    private function startKong()
+    public static function tearDownAfterClass()
     {
-        if ($this->isContainerStarted()) {
+        static::stopKong();
+    }
+
+    private static function startKong()
+    {
+        if (static::isContainerStarted()) {
             return;
         }
 
         try {
-            $this->startDatabaseContainer();
-            $this->runKongMigrations();
-            $this->startKongContainer();
+            static::startDatabaseContainer();
+            static::runKongMigrations();
+            static::startKongContainer();
         } catch (Throwable $exception) {
-            $this->stopKong();
+            static::stopKong();
             throw $exception;
         }
     }
 
-    private function stopKong()
+    private static function stopKong()
     {
         $output = [];
         $status = 0;
@@ -53,7 +46,7 @@ class KongTest extends \PHPUnit\Framework\TestCase
         exec('docker-compose down 2>/dev/null', $output, $status);
     }
 
-    private function checkIfDockerComposeIsInstalled()
+    private static function checkIfDockerComposeIsInstalled()
     {
         $output;
         $status = 0;
@@ -65,16 +58,16 @@ class KongTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    private function isContainerStarted()
+    private static function isContainerStarted()
     {
-        $this->checkIfDockerComposeIsInstalled();
+        static::checkIfDockerComposeIsInstalled();
 
         exec('docker-compose ps 2>/dev/null', $output, $status);
 
         return count($output) === 4 && strpos(strtolower($output[2]), ' up ') && strpos(strtolower($output[3]), ' up ');
     }
 
-    private function startDatabaseContainer()
+    private static function startDatabaseContainer()
     {
         exec('docker-compose up -d postgres 2>/dev/null', $output, $status);
 
@@ -86,7 +79,7 @@ class KongTest extends \PHPUnit\Framework\TestCase
         sleep(3); // Database needs some time to spin up after docker finishes.
     }
 
-    private function runKongMigrations()
+    private static function runKongMigrations()
     {
         exec('docker-compose run --rm kong kong migrations up 2>/dev/null', $output, $status);
 
@@ -96,7 +89,7 @@ class KongTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    private function startKongContainer()
+    private static function startKongContainer()
     {
         exec('docker-compose up -d kong 2>/dev/null', $output, $status);
 
