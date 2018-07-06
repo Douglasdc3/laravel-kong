@@ -14,7 +14,7 @@ class Service implements Arrayable
     public $protocol = 'http';
     public $host;
     public $port = 80;
-    public $path;
+    public $path = '/';
     public $retries = 5;
     public $connect_timeout = 60000;
     public $write_timeout = 60000;
