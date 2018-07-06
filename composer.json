@@ -22,12 +22,16 @@
             "DouglasDC3\\Kong\\": "src/"
         }
     },
+    "autoload-dev": {
+        "files": [
+            "tests/KongTest.php"
+        ]
+    },
     "require": {
         "php": "^7.0",
         "guzzlehttp/guzzle": "^6.0",
         "illuminate/contracts": "~5.6.0",
         "illuminate/support": "~5.6.0"
-
     },
     "require-dev": {
         "mockery/mockery": "^1.0",
