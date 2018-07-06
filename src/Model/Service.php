@@ -2,9 +2,9 @@
 
 namespace DouglasDC3\Kong\Model;
 
-use DouglasDC3\Kong\Api\Plugins;
-use DouglasDC3\Kong\Api\Routes;
 use DouglasDC3\Kong\Kong;
+use DouglasDC3\Kong\Api\Routes;
+use DouglasDC3\Kong\Api\Plugins;
 use Illuminate\Contracts\Support\Arrayable;
 
 class Service implements Arrayable
@@ -110,5 +110,16 @@ class Service implements Arrayable
             'write_timeout' => $this->write_timeout,
             'read_timeout' => $this->read_timeout,
         ];
+    }
+
+    /**
+     * Return the id when calling to string to make it easier
+     * To use the object in a url path
+     *
+     * @return string Service ID
+     */
+    public function __toString()
+    {
+        return $this->id;
     }
 }
