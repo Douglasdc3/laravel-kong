@@ -33,6 +33,8 @@ class Service implements Arrayable
      */
     public function __construct($data, Kong $kong = null)
     {
+        $this->kong = $kong;
+
         if (is_string($data)) {
             $this->setUri($data);
             return;
@@ -41,7 +43,6 @@ class Service implements Arrayable
         foreach ($data as $key => $value) {
             $this->$key = $value;
         }
-        $this->kong = $kong;
     }
 
     /**
