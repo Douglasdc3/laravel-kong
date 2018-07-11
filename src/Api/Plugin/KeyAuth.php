@@ -31,7 +31,7 @@ class KeyAuth extends KongApi
      */
     public function list()
     {
-        return $this->listCall("consumers/{$this->consumer->id}/key-auths", KeyAuthConsumer::class, []);
+        return $this->listCall("consumers/{$this->consumer->id}/key-auth", KeyAuthConsumer::class, []);
     }
 
     /**
@@ -44,7 +44,7 @@ class KeyAuth extends KongApi
      */
     public function find($id)
     {
-        return new KeyAuthConsumer($this->kong->getClient()->get("consumers/{$this->consumer->id}/key-auths/$id"), $this->kong);
+        return new KeyAuthConsumer($this->kong->getClient()->get("consumers/{$this->consumer->id}/key-auth/$id"), $this->kong);
     }
 
     /**
@@ -61,6 +61,6 @@ class KeyAuth extends KongApi
             $key = new KeyAuthConsumer($key);
         }
 
-        return new KeyAuthConsumer($this->kong->getClient()->post("consumers/{$this->consumer->id}/key-auths", $key->toArray()), $this->kong);
+        return new KeyAuthConsumer($this->kong->getClient()->post("consumers/{$this->consumer->id}/key-auth", $key->toArray()), $this->kong);
     }
 }
