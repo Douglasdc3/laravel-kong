@@ -69,6 +69,6 @@ class Consumers extends KongApi
      */
     public function delete($id)
     {
-        return $this->delete("consumers/$id");
+        return $this->deleteCall("consumers/$id");
     }
 }
