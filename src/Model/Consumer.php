@@ -99,4 +99,9 @@ class Consumer implements Arrayable
             'created_at' => $this->created_at,
         ];
     }
+
+    public function __toString()
+    {
+        return $this->id;
+    }
 }
