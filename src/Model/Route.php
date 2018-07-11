@@ -32,7 +32,7 @@ class Route implements Arrayable
             $this->$key = $value;
         }
 
-        $this->service = $data['service']['id'] ?? null;
+        $this->service = $data['service'] instanceof Service ? $data['service'] : ($data['service']['id'] ?? null);
         $this->kong = $kong;
     }
 
@@ -75,8 +75,13 @@ class Route implements Arrayable
             'strip_path' => $this->strip_path,
             'preserve_host' => $this->preserve_host,
             'service' => [
-                'id' => $this->service instanceof Service ? $this->service->id : $this->service
+                'id' => $this->service instanceof Service ? $this->service->id : $this->service,
             ]
         ];
+    }
+
+    public function __toString()
+    {
+        return $this->id;
     }
 }

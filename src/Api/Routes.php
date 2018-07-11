@@ -78,6 +78,6 @@ class Routes extends KongApi
      */
     public function delete($id)
     {
-        return $this->kong->getClient()->delete("{$this->service}routes/$id")->getStatusCode() === 204;
+        return $this->deleteCall("{$this->service}routes/$id");
     }
 }
