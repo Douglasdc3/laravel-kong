@@ -5,6 +5,8 @@ use DouglasDC3\Kong\Http\HttpClient;
 
 class KongTest extends \PHPUnit\Framework\TestCase
 {
+    const DELAY_START = 4;
+    /** @var Kong */
     protected $kong;
 
     public function setUp()
@@ -48,9 +50,9 @@ class KongTest extends \PHPUnit\Framework\TestCase
 
     private static function checkIfDockerComposeIsInstalled()
     {
-        $output;
+        $output = null;
         $status = 0;
-    
+
         exec('docker-compose version 2>/dev/null', $output, $status);
 
         if ($status !== 0) {
@@ -76,7 +78,7 @@ class KongTest extends \PHPUnit\Framework\TestCase
             throw new Exception('Failed to start database.');
         }
 
-        sleep(3); // Database needs some time to spin up after docker finishes.
+        sleep(self::DELAY_START); // Database needs some time to spin up after docker finishes.
     }
 
     private static function runKongMigrations()
@@ -99,6 +101,6 @@ class KongTest extends \PHPUnit\Framework\TestCase
         }
 
         // Wait for kong to start
-        sleep(2);
+        sleep(self::DELAY_START);
     }
 }
