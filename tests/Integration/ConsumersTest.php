@@ -2,19 +2,19 @@
 
 use DouglasDC3\Kong\Model\Consumer;
 
-class ConsumersTest extends KongTest 
+class ConsumersTest extends KongTest
 {
     /** @test */
     function it_creates_a_consumer()
     {
         $consumer = new Consumer(['username' => 'create-consumer-john', 'custom_id' => 'create-foobar']);
 
-        $createdConusumer = $this->kong->consumers()->create($consumer);
+        $createdConsumer = $this->kong->consumers()->create($consumer);
 
-        $this->assertNotNull($createdConusumer->id);
-        $this->assertNotNull($createdConusumer->created_at);
-        $this->assertEquals('create-consumer-john', $createdConusumer->username);
-        $this->assertEquals('create-foobar', $createdConusumer->custom_id);
+        $this->assertNotNull($createdConsumer->id);
+        $this->assertNotNull($createdConsumer->created_at);
+        $this->assertEquals('create-consumer-john', $createdConsumer->username);
+        $this->assertEquals('create-foobar', $createdConsumer->custom_id);
     }
 
     /** @test */

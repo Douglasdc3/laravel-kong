@@ -3,6 +3,7 @@
 namespace DouglasDC3\Kong\Api\Plugin;
 
 use DouglasDC3\Kong\Api\KongApi;
+use DouglasDC3\Kong\Model\Plugin\KeyAuthConsumer;
 
 class KeyAuth extends KongApi
 {
@@ -12,7 +13,7 @@ class KeyAuth extends KongApi
     private $consumer;
 
     /**
-     * Jwt constructor.
+     * Key Auth constructor.
      *
      * @param \DouglasDC3\Kong\Kong $kong
      * @param \DouglasDC3\Kong\Model\Consumer  $consumer
@@ -44,11 +45,11 @@ class KeyAuth extends KongApi
      */
     public function find($id)
     {
-        return new KeyAuthConsumer($this->kong->getClient()->get("consumers/{$this->consumer->id}/key-auth/$id"), $this->kong);
+        return $this->getCall("consumers/{$this->consumer->id}/key-auth/$id", KeyAuthConsumer::class);
     }
 
     /**
-     * Create a new JWT token
+     * Add a new key.
      *
      * @param null   $key
      *
@@ -58,9 +59,13 @@ class KeyAuth extends KongApi
     public function create($key = null)
     {
         if (!($key instanceof KeyAuthConsumer)) {
-            $key = new KeyAuthConsumer($key);
+            if (is_array($key)) {
+                $key = new KeyAuthConsumer(array_merge($key, ['consumer_id' => $this->consumer->id]));
+            } else {
+                $key = new KeyAuthConsumer(['consumer_id' => $this->consumer->id, 'key' => $key]);
+            }
         }
 
-        return new KeyAuthConsumer($this->kong->getClient()->post("consumers/{$this->consumer->id}/key-auth", $key->toArray()), $this->kong);
+        return $this->postCall("consumers/{$this->consumer->id}/key-auth", $key->toArray(), KeyAuthConsumer::class);
     }
 }

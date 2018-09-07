@@ -34,6 +34,8 @@ class Plugins extends KongApi
     }
 
     /**
+     * List all plugins
+     *
      * @return static
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
@@ -46,9 +48,11 @@ class Plugins extends KongApi
     }
 
     /**
+     * Create a new plugin
+     *
      * @param \DouglasDC3\Kong\Model\Plugin\Plugin $plugin
      *
-     * @return mixed
+     * @return Plugin
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function create(Plugin $plugin)
@@ -61,9 +65,11 @@ class Plugins extends KongApi
     }
 
     /**
+     * Update an existing plugin
+     *
      * @param \DouglasDC3\Kong\Model\Plugin\Plugin $plugin
      *
-     * @return mixed
+     * @return Plugin
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function update(Plugin $plugin)
@@ -76,7 +82,9 @@ class Plugins extends KongApi
     }
 
     /**
-     * @param $id
+     * Delete a plugin
+     *
+     * @param string $id Uuid
      *
      * @return bool
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -88,7 +96,11 @@ class Plugins extends KongApi
 
     private function buildUrl()
     {
-        return $this->parent->getPath() . '/plugins';
+        if ($this->parent) {
+            return $this->parent->getPath() . '/plugins';
+        }
+
+        return '/plugins';
     }
 
     private function mapPlugin($item)

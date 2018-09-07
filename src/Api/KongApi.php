@@ -38,6 +38,44 @@ abstract class KongApi
     }
 
     /**
+     * @param $url
+     * @param $class
+     *
+     * @return \Illuminate\Contracts\Support\Arrayable of type $class
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    protected function getCall($url, $class)
+    {
+        return new $class($this->kong->getClient()->get($url), $this->kong);
+    }
+
+    /**
+     * @param $url
+     * @param $data
+     * @param $class
+     *
+     * @return \Illuminate\Contracts\Support\Arrayable of type $class
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function postCall($url, $data, $class)
+    {
+        return new $class($this->kong->getClient()->post($url, $data), $this->kong);
+    }
+
+    /**
+     * @param $url
+     * @param $data
+     * @param $class
+     *
+     * @return \Illuminate\Contracts\Support\Arrayable of type $class
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function patchCall($url, $data, $class)
+    {
+        return new $class($this->kong->getClient()->patch($url, $data), $this->kong);
+    }
+
+    /**
      * Delete a resource.
      *
      * @param $url
