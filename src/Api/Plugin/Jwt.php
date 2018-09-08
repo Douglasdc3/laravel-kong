@@ -48,7 +48,7 @@ class Jwt extends KongApi
      */
     public function find($id)
     {
-        return new JwtConsumer($this->kong->getClient()->get("consumers/{$this->consumer->id}/jwt/$id"), $this->kong);
+        return $this->getCall("consumers/{$this->consumer->id}/jwt/$id", JwtConsumer::class);
     }
 
     /**
@@ -59,7 +59,7 @@ class Jwt extends KongApi
      * @param null   $secret
      * @param null   $rsa
      *
-     * @return mixed
+     * @return JwtConsumer
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function create($key = null, $algo = 'HS256', $secret = null, $rsa = null)
@@ -74,6 +74,6 @@ class Jwt extends KongApi
             ]);
         }
 
-        return new JwtConsumer($this->kong->getClient()->post("consumers/{$this->consumer->id}/jwt", $key->toArray()), $this->kong);
+        return $this->postCall("consumers/{$this->consumer->id}/jwt", $key->toArray(), JwtConsumer::class);
     }
 }
