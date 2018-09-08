@@ -35,9 +35,9 @@ class KeyAuthPluginTest extends KongTest
     }
 
     /** @test */
-    function it_adds_a_jwt_token()
+    function it_adds_a_key_token()
     {
-        $consumer = $this->kong->consumers()->create(new Consumer(['username' => 'add-jwt-token']));
+        $consumer = $this->kong->consumers()->create(new Consumer(['username' => 'add-key-token']));
 
         $keyAuth = $consumer->keyAuth()->create('our-secret-key');
 
@@ -47,9 +47,9 @@ class KeyAuthPluginTest extends KongTest
     }
 
     /** @test */
-    function it_adds_a_jwt_token_with_consumer()
+    function it_adds_a_key_token_with_consumer()
     {
-        $consumer = $this->kong->consumers()->create(new Consumer(['username' => 'add-jwt-token-with-consumer']));
+        $consumer = $this->kong->consumers()->create(new Consumer(['username' => 'add-key-token-with-consumer']));
 
         $keyAuth = $consumer->keyAuth()->create(['key' => 'array-our-secret-key', 'consumer_id' => $consumer->id]);
 
@@ -59,9 +59,9 @@ class KeyAuthPluginTest extends KongTest
     }
 
     /** @test */
-    function it_adds_a_jwt_token_with_key_auth_consumer()
+    function it_adds_a_key_token_with_key_auth_consumer()
     {
-        $consumer = $this->kong->consumers()->create(new Consumer(['username' => 'add-jwt-token-with-auth-object']));
+        $consumer = $this->kong->consumers()->create(new Consumer(['username' => 'add-key-token-with-auth-object']));
 
         $keyAuth = $consumer->keyAuth()->create(new KeyAuthConsumer([
             'key' => 'object-our-secret-key', 'consumer_id' => $consumer->id
@@ -75,7 +75,7 @@ class KeyAuthPluginTest extends KongTest
     /** @test */
     function it_finds_a_consumer()
     {
-        $consumer = $this->kong->consumers()->create(new Consumer(['username' => 'find-jwt-token']));
+        $consumer = $this->kong->consumers()->create(new Consumer(['username' => 'find-key-token']));
 
         $keyAuth = $consumer->keyAuth()->create(new KeyAuthConsumer([
             'key' => 'find-our-secret-key', 'consumer_id' => $consumer->id
