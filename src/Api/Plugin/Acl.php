@@ -13,7 +13,7 @@ class Acl extends KongApi
     private $consumer;
 
     /**
-     * Jwt constructor.
+     * ACL constructor.
      *
      * @param \DouglasDC3\Kong\Kong $kong
      * @param \DouglasDC3\Kong\Model\Consumer  $consumer
@@ -25,7 +25,7 @@ class Acl extends KongApi
     }
 
     /**
-     * List all JWT tokens
+     * List all ACL tokens
      *
      * @return AclConsumer[]|\Illuminate\Support\Collection
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -45,7 +45,7 @@ class Acl extends KongApi
      */
     public function find($id)
     {
-        return new AclConsumer($this->kong->getClient()->get("consumers/{$this->consumer->id}/acls/$id"), $this->kong);
+        return $this->getCall("consumers/{$this->consumer->id}/acls/$id", AclConsumer::class);
     }
 
     /**
@@ -53,7 +53,7 @@ class Acl extends KongApi
      *
      * @param $acl
      *
-     * @return mixed
+     * @return AclConsumer
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function create($acl)
@@ -65,7 +65,7 @@ class Acl extends KongApi
             ]);
         }
 
-        return new AclConsumer($this->kong->getClient()->post("consumers/{$this->consumer->id}/acls", $acl->toArray()), $this->kong);
+        return $this->postCall("consumers/{$this->consumer->id}/acls", $acl->toArray(), AclConsumer::class);
     }
 
     /**
@@ -88,6 +88,6 @@ class Acl extends KongApi
             return false;
         }
 
-        return $this->kong->getClient()->delete("consumers/{$this->consumer->id}/acls/{$acl->id}")->getStatusCode() < 300;
+        return $this->deleteCall("consumers/{$this->consumer->id}/acls/{$acl->id}");
     }
 }
