@@ -3,6 +3,19 @@
 return [
     /*
     |--------------------------------------------------------------------------
+    | Enable kong
+    |--------------------------------------------------------------------------
+    |
+    | Toggles if kong should be used in the first place. Wen true the real
+    | Kong api will be called. When this value is set to false all calls
+    | to kong are ignored and not send. This is useful for development.
+    |
+    */
+
+    'enabled' => env('KONG_ENABLED', true),
+
+    /*
+    |--------------------------------------------------------------------------
     | Base URI
     |--------------------------------------------------------------------------
     |
