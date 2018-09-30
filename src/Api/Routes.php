@@ -34,7 +34,7 @@ class Routes extends KongApi
      */
     public function list($offset = 0, $limit = 100)
     {
-        return $this->listCall("{$this->service}routes", Route::class, $this->paginateParams($offset, $limit));
+        return $this->listCall("{$this->service}routes", Route::class, $this->service ? [] : $this->paginateParams($offset, $limit));
     }
 
     /**
