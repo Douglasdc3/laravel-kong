@@ -2,6 +2,9 @@
 
 All notable changes to `kong` package will be documented in this file.
 
+## v0.2.1
+* Fix: Url's including dash are split incorrect (#1)
+
 ## v0.2.0
 
 * Laravel 5.7 compatible
