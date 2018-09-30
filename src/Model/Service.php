@@ -51,7 +51,7 @@ class Service implements Arrayable
     public function setUri($uri)
     {
         $matches = [];
-        preg_match('/(https?):\/\/([A-z0-9\.]*)(:?[0-9]*)(.*)/', $uri, $matches);
+        preg_match('/(https?):\/\/([A-z0-9\-\.]*)(:?[0-9]*)(.*)/', $uri, $matches);
 
         $this->protocol = $matches[1];
         $this->host = $matches[2];
