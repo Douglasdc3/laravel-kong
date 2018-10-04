@@ -14,6 +14,11 @@ class HttpClient
     private $options;
 
     /**
+     * @var Client
+     */
+    private $client;
+
+    /**
      * HttpClient constructor.
      *
      * @param string $baseUrl Protocol, Port and base path.
