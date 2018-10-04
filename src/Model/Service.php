@@ -35,13 +35,12 @@ class Service implements Arrayable
     {
         $this->kong = $kong;
 
-        if (is_string($data)) {
+        if (is_array($data)) {
+            foreach ($data as $key => $value) {
+                $this->$key = $value;
+            }
+        } elseif (is_string($data)) {
             $this->setUri($data);
-            return;
-        }
-
-        foreach ($data as $key => $value) {
-            $this->$key = $value;
         }
     }
 
