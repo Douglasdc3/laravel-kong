@@ -52,7 +52,7 @@ class Service implements Arrayable
         $this->protocol = parse_url($uri, PHP_URL_SCHEME);
         $this->host = parse_url($uri, PHP_URL_HOST);
         $this->port = parse_url($uri, PHP_URL_PORT) ?? 80;
-        $this->path = parse_url($uri, PHP_URL_PATH) . '/';
+        $this->path = parse_url($uri, PHP_URL_PATH);
     }
 
 
