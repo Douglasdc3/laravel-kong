@@ -50,13 +50,10 @@ class Service implements Arrayable
      */
     public function setUri($uri)
     {
-        $matches = [];
-        preg_match('/(https?):\/\/([A-z0-9\-\.]*)(:?[0-9]*)(.*)/', $uri, $matches);
-
-        $this->protocol = $matches[1];
-        $this->host = $matches[2];
-        $this->port = empty($matches[3]) ? 80 : (int)ltrim($matches[3], ':');
-        $this->path = '/' . ltrim($matches[4], '/');
+        $this->protocol = parse_url($uri, PHP_URL_SCHEME);
+        $this->host = parse_url($uri, PHP_URL_HOST);
+        $this->port = parse_url($uri, PHP_URL_PORT) ?? 80;
+        $this->path = parse_url($uri, PHP_URL_PATH) . '/';
     }
 
 
@@ -99,16 +96,16 @@ class Service implements Arrayable
     public function toArray()
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'protocol' => $this->protocol,
-            'host' => $this->host,
-            'port' => $this->port,
-            'path' => $this->path,
-            'retries' => $this->retries,
+            'id'              => $this->id,
+            'name'            => $this->name,
+            'protocol'        => $this->protocol,
+            'host'            => $this->host,
+            'port'            => $this->port,
+            'path'            => $this->path,
+            'retries'         => $this->retries,
             'connect_timeout' => $this->connect_timeout,
-            'write_timeout' => $this->write_timeout,
-            'read_timeout' => $this->read_timeout,
+            'write_timeout'   => $this->write_timeout,
+            'read_timeout'    => $this->read_timeout,
         ];
     }
 
