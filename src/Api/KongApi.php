@@ -6,6 +6,8 @@ use DouglasDC3\Kong\Kong;
 
 abstract class KongApi
 {
+    const STATUS_NO_CONTENT = 204;
+
     /**
      * @var \DouglasDC3\Kong\Http\HttpClient
      */
@@ -85,7 +87,7 @@ abstract class KongApi
      */
     protected function deleteCall($url)
     {
-        return $this->kong->getClient()->delete($url)->getStatusCode() === 204;
+        return $this->kong->getClient()->delete($url)->getStatusCode() === self::STATUS_NO_CONTENT;
     }
 
     /**
