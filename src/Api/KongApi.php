@@ -102,7 +102,7 @@ abstract class KongApi
         $pagination = ['size' => $limit];
 
         if ($offset > 0) {
-            $pagination['offset'];
+            $pagination['offset'] = $offset;
         }
 
         return $pagination;
