@@ -9,11 +9,16 @@ use Illuminate\Contracts\Support\Arrayable;
 
 class Service implements Arrayable
 {
+    /** @var string */
+    const URI_REGEX = '/(https?):\/\/([A-z0-9\-\.]*)(:?[0-9]*)(.*)/';
+    /** @var int */
+    const DEFAULT_PORT = 80;
+
     public $id;
     public $name;
     public $protocol = 'http';
     public $host;
-    public $port = 80;
+    public $port = self::DEFAULT_PORT;
     public $path = '/';
     public $retries = 5;
     public $connect_timeout = 60000;
@@ -51,11 +56,11 @@ class Service implements Arrayable
     public function setUri($uri)
     {
         $matches = [];
-        preg_match('/(https?):\/\/([A-z0-9\-\.]*)(:?[0-9]*)(.*)/', $uri, $matches);
+        preg_match(self::URI_REGEX, $uri, $matches);
 
         $this->protocol = $matches[1];
         $this->host = $matches[2];
-        $this->port = empty($matches[3]) ? 80 : (int)ltrim($matches[3], ':');
+        $this->port = empty($matches[3]) ? self::DEFAULT_PORT : (int)ltrim($matches[3], ':');
         $this->path = '/' . ltrim($matches[4], '/');
     }
 
