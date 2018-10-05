@@ -9,11 +9,14 @@ use Illuminate\Contracts\Support\Arrayable;
 
 class Service implements Arrayable
 {
+    /** @var int */
+    const DEFAULT_PORT = 80;
+
     public $id;
     public $name;
     public $protocol = 'http';
     public $host;
-    public $port = 80;
+    public $port = self::DEFAULT_PORT;
     public $path = '/';
     public $retries = 5;
     public $connect_timeout = 60000;
