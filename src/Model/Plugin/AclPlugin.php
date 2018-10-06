@@ -25,6 +25,11 @@ class AclPlugin extends Plugin
         }
     }
 
+    /**
+     * Returns the current whitelist and blacklist.
+     *
+     * @return array
+     */
     protected function configArray()
     {
         return [

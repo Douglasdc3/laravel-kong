@@ -26,9 +26,18 @@ abstract class Plugin implements Arrayable
         $this->setData($data);
     }
 
+    /**
+     * Returns the current configuration of the plugin.
+     *
+     * @return array
+     */
+    abstract protected function configArray();
 
-    protected abstract function configArray();
-
+    /**
+     * Set the Route or Service parent for the plugin.
+     *
+     * @param mixed $parent The Route or Service acting as parent.
+     */
     public function setParent($parent)
     {
         if ($parent instanceof Route) {
@@ -48,12 +57,12 @@ abstract class Plugin implements Arrayable
     public function toArray()
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
+            'id'         => $this->id,
+            'name'       => $this->name,
             'service_id' => $this->service_id,
-            'route_id' => $this->route_id,
+            'route_id'   => $this->route_id,
             'created_at' => $this->created_at,
-            'config' => $this->configArray(),
+            'config'     => $this->configArray(),
         ];
     }
 
