@@ -29,7 +29,7 @@ class JwtPlugin extends Plugin
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function configArray()
     {

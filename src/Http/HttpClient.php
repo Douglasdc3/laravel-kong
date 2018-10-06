@@ -74,8 +74,9 @@ class HttpClient
      * @param array  $query   Optional query params.
      * @param array  $headers Optional headers.
      *
-     * @return array Json response.
      * @throws \GuzzleHttp\Exception\GuzzleException
+     *
+     * @return array Json response.
      */
     public function put($url, $body = [], $query = [], $headers = [])
     {
@@ -117,7 +118,7 @@ class HttpClient
     }
 
     /**
-     *  Request Handler
+     *  Request Handler.
      *
      * @param string $verb    The HTTP verb.
      * @param string $url     The URL to send the request to.
@@ -128,7 +129,7 @@ class HttpClient
      */
     private function request($verb, $url, $query = [], $body = [], $headers = [], $json = true)
     {
-        if (! empty($body)) {
+        if (!empty($body)) {
             $headers['Content-Type'] = 'application/json';
         }
 
