@@ -112,6 +112,16 @@ class HttpClient
         return $this->request('DELETE', $url, $query, $body, $headers, false);
     }
 
+    /**
+     *  Request Handler
+     *
+     * @param string $verb The HTTP verb.
+     * @param string $url The URL to send the request to.
+     * @param array $query Parameters for a query string.
+     * @param array $body Array of data for sending as request body.
+     * @param array $headers HTTP headers for request.
+     * @param bool $json Defaults to true and adds standard JSON application header.
+     */
     private function request($verb, $url, $query = [], $body = [], $headers = [], $json = true)
     {
         if (! empty($body)) {

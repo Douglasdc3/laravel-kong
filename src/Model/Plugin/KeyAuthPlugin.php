@@ -26,6 +26,9 @@ class KeyAuthPlugin extends Plugin
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     protected function configArray()
     {
         return [

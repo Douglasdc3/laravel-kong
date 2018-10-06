@@ -26,9 +26,18 @@ abstract class Plugin implements Arrayable
         $this->setData($data);
     }
 
-
+    /**
+     * Returns the current configuration of the plugin.
+     *
+     * @return array
+     */
     protected abstract function configArray();
 
+    /**
+     * Set the Route or Service parent for the plugin.
+     *
+     * @param mixed $parent The Route or Service acting as parent.
+     */
     public function setParent($parent)
     {
         if ($parent instanceof Route) {
