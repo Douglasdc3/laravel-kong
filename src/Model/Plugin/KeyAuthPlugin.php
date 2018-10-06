@@ -32,10 +32,10 @@ class KeyAuthPlugin extends Plugin
     protected function configArray()
     {
         return [
-            'key_names' => $this->key_names,
-            'key_in_body' => $this->key_in_body,
+            'key_names'        => $this->key_names,
+            'key_in_body'      => $this->key_in_body,
             'hide_credentials' => $this->hide_credentials,
-            'anonymous' => $this->anonymous,
+            'anonymous'        => $this->anonymous,
             'run_on_preflight' => $this->run_on_preflight,
         ];
     }

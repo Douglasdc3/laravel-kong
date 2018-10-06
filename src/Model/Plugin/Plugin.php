@@ -31,7 +31,7 @@ abstract class Plugin implements Arrayable
      *
      * @return array
      */
-    protected abstract function configArray();
+    abstract protected function configArray();
 
     /**
      * Set the Route or Service parent for the plugin.
@@ -57,12 +57,12 @@ abstract class Plugin implements Arrayable
     public function toArray()
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
+            'id'         => $this->id,
+            'name'       => $this->name,
             'service_id' => $this->service_id,
-            'route_id' => $this->route_id,
+            'route_id'   => $this->route_id,
             'created_at' => $this->created_at,
-            'config' => $this->configArray(),
+            'config'     => $this->configArray(),
         ];
     }
 

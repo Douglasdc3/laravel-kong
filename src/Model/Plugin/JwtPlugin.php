@@ -34,12 +34,12 @@ class JwtPlugin extends Plugin
     protected function configArray()
     {
         return [
-            'uri_param_names' => $this->uri_param_names,
-            'cookie_names' => $this->cookie_names,
+            'uri_param_names'  => $this->uri_param_names,
+            'cookie_names'     => $this->cookie_names,
             'claims_to_verify' => $this->claims_to_verify,
-            'key_claim_name' => $this->key_claim_name,
+            'key_claim_name'   => $this->key_claim_name,
             'secret_is_base64' => $this->secret_is_base64,
-            'anonymous' => $this->anonymous,
+            'anonymous'        => $this->anonymous,
             'run_on_preflight' => $this->run_on_preflight,
         ];
     }
