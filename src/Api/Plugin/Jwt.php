@@ -87,5 +87,4 @@ class Jwt extends KongApi
     {
         return $this->deleteCall("consumers/{$this->consumer->id}/jwt/$id", JwtConsumer::class);
     }
-
 }
