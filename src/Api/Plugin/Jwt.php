@@ -3,6 +3,7 @@
 namespace DouglasDC3\Kong\Api\Plugin;
 
 use DouglasDC3\Kong\Api\KongApi;
+use DouglasDC3\Kong\Model\Consumer;
 use DouglasDC3\Kong\Model\Plugin\JwtConsumer;
 
 class Jwt extends KongApi

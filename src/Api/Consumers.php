@@ -71,4 +71,15 @@ class Consumers extends KongApi
     {
         return $this->deleteCall("consumers/$id");
     }
+
+    /**
+     * Find a consumer with iss key / id
+     *
+     * @param string $iss
+     * @return Consumer
+     */
+    public function findByIss(string $iss)
+    {
+        return new Consumer($this->kong->getClient()->get("jwts/{$iss}/consumer"), $this->kong);
+    }
 }
