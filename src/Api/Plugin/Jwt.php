@@ -88,15 +88,4 @@ class Jwt extends KongApi
     {
         return $this->deleteCall("consumers/{$this->consumer->id}/jwt/$id", JwtConsumer::class);
     }
-
-    /**
-     * Find a JWT token by iss code
-     *
-     * @param $iss
-     * @return \Illuminate\Contracts\Support\Arrayable
-     */
-    public function findByIss($iss)
-    {
-        return $this->getCall("jwts/{$iss}/consumer", Consumer::class);
-    }
 }
