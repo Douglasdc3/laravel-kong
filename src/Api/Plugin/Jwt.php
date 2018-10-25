@@ -3,6 +3,7 @@
 namespace DouglasDC3\Kong\Api\Plugin;
 
 use DouglasDC3\Kong\Api\KongApi;
+use DouglasDC3\Kong\Model\Consumer;
 use DouglasDC3\Kong\Model\Plugin\JwtConsumer;
 
 class Jwt extends KongApi
@@ -75,5 +76,27 @@ class Jwt extends KongApi
         }
 
         return $this->postCall("consumers/{$this->consumer->id}/jwt", $key->toArray(), JwtConsumer::class);
+    }
+
+    /**
+     * Delete a JWT token
+     *
+     * @param $id
+     * @return bool
+     */
+    public function delete($id)
+    {
+        return $this->deleteCall("consumers/{$this->consumer->id}/jwt/$id", JwtConsumer::class);
+    }
+
+    /**
+     * Find a JWT token by iss code
+     *
+     * @param $iss
+     * @return \Illuminate\Contracts\Support\Arrayable
+     */
+    public function findByIss($iss)
+    {
+        return $this->getCall("jwts/{$iss}/consumer", Consumer::class);
     }
 }
