@@ -76,4 +76,15 @@ class Jwt extends KongApi
 
         return $this->postCall("consumers/{$this->consumer->id}/jwt", $key->toArray(), JwtConsumer::class);
     }
+
+    /**
+     * Delete a JWT token
+     *
+     * @param $id
+     * @return bool
+     */
+    public function delete($id)
+    {
+        return $this->deleteCall("consumers/{$this->consumer->id}/jwt/$id", JwtConsumer::class);
+    }
 }
