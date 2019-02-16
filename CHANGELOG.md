@@ -2,6 +2,16 @@
 
 All notable changes to `kong` package will be documented in this file.
 
+## v0.2.3
+* Add: Find JWT by iss
+* Add: Delete JWT
+* Fix: Post body cannot contain null values (like id)
+* Improvements: Stylefix
+* Improvements: Docblock
+
+## v0.2.2
+* Fix: Fetching routes cannot be paginated
+
 ## v0.2.1
 * Fix: Fetching routes on a service list call does not accept pagination
 
