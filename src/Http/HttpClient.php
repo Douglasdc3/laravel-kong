@@ -63,6 +63,10 @@ class HttpClient
      */
     public function post($url, $body = [], $query = [], $headers = [])
     {
+        $body = array_filter($body, function ($value) {
+            return ! \is_null($value);
+        });
+
         return $this->request('POST', $url, $query, $body, $headers);
     }
 
