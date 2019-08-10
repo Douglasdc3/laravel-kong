@@ -6,9 +6,9 @@ This is laravel package that allows you to integrate with [kong](https://getkong
 Below you'll find package version compatibility with different versions of Kong and supported plugins.
 
 Version | Kong | JWT plugin | ACL plugin
-:-------|:-----|:-----------|:----------
-v0.2.4 | 1.x | 1.0-x | 1.0-x
-v0.2.3 | 0.x | 0.1-x | 0.1-x
+:------|:----|:------|:-------
+v1.x   | 1.x | 1.0-x | 1.0-x
+v0.2.x | 0.x | 0.1-x | 0.1-x
 
 # Install
 
