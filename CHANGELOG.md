@@ -2,6 +2,10 @@
 
 All notable changes to `kong` package will be documented in this file.
 
+## v1.0.0
+* FIX: compatibility with kong plugins version 1.x (#9)
+* Stable release
+
 ## v0.2.3
 * Add: Find JWT by iss
 * Add: Delete JWT

@@ -71,7 +71,7 @@ class Jwt extends KongApi
                 'algorithm' => $algo,
                 'secret' => $secret,
                 'rsa_public_key' => $rsa,
-                'consumer_id' => $this->consumer->id,
+                'consumer' => $this->consumer->id,
             ]);
         }
 

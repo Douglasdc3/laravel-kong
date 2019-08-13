@@ -56,7 +56,7 @@ class KongTest extends \PHPUnit\Framework\TestCase
         exec('docker-compose version 2>/dev/null', $output, $status);
 
         if ($status !== 0) {
-            throw new Exception('the `docker-compose` command is not installed or accisable from this user. Integration tests required docker to be run.');
+            throw new Exception('the `docker-compose` command is not installed or accessible from this user. Integration tests required docker to be run.');
         }
     }
 
