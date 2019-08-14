@@ -60,9 +60,9 @@ class KeyAuth extends KongApi
     {
         if (!($key instanceof KeyAuthConsumer)) {
             if (is_array($key)) {
-                $key = new KeyAuthConsumer(array_merge($key, ['consumer_id' => $this->consumer->id]));
+                $key = new KeyAuthConsumer(array_merge($key, ['consumer' => $this->consumer->id]));
             } else {
-                $key = new KeyAuthConsumer(['consumer_id' => $this->consumer->id, 'key' => $key]);
+                $key = new KeyAuthConsumer(['consumer' => $this->consumer->id, 'key' => $key]);
             }
         }
 
