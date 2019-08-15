@@ -2,6 +2,10 @@
 
 All notable changes to `kong` package will be documented in this file.
 
+## v1.0.1
+* FIX: Creating Key auth plugin (#12)
+* FIX: Creating ACL plugin (#14)
+
 ## v1.0.0
 * FIX: compatibility with kong plugins version 1.x (#9)
 * Stable release
