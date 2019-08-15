@@ -60,8 +60,7 @@ class Acl extends KongApi
     {
         if (!($acl instanceof AclConsumer)) {
             $acl = new AclConsumer([
-                'group' => $acl,
-                'consumer' => $this->consumer->id,
+                'group' => $acl
             ]);
         }
 
