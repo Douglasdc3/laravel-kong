@@ -9,7 +9,7 @@ class KeyAuthConsumer implements Arrayable
 {
     public $id;
     public $key;
-    public $consumer_id;
+    public $consumer;
     public $created_at;
     /**
      * @var \DouglasDC3\Kong\Kong
@@ -42,7 +42,7 @@ class KeyAuthConsumer implements Arrayable
         return [
             'id' => $this->id,
             'key' => $this->key,
-            'consumer_id' => $this->consumer_id,
+            'consumer' => $this->consumer,
             'created_at' => $this->created_at,
         ];
     }
