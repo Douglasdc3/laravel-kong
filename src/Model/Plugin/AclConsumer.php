@@ -10,7 +10,7 @@ class AclConsumer implements Arrayable
     public $id;
     public $created_at;
     public $group;
-    public $consumer_id;
+    public $consumer;
 
     /**
      * @var \DouglasDC3\Kong\Kong
@@ -50,7 +50,7 @@ class AclConsumer implements Arrayable
             'id' => $this->id,
             'created_at' => $this->created_at,
             'group' => $this->group,
-            'consumer_id' => $this->consumer_id,
+            'consumer' => $this->consumer,
         ];
     }
 }
