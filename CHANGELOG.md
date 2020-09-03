@@ -2,6 +2,10 @@
 
 All notable changes to `kong` package will be documented in this file.
 
+## v1.1
+* Add: Laravel 6.x Support
+* Add: Laravel 7.x Support
+
 ## v1.0.1
 * FIX: Creating Key auth plugin (#12)
 * FIX: Creating ACL plugin (#14)
