@@ -2,6 +2,9 @@
 
 All notable changes to `kong` package will be documented in this file.
 
+## v1.2
+* Add: Laravel 8.x Support
+
 ## v1.1
 * Add: Laravel 6.x Support
 * Add: Laravel 7.x Support
