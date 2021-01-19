@@ -7,7 +7,7 @@ Below you'll find package version compatibility with different versions of Kong 
 
 Version | Kong | JWT plugin | ACL plugin
 :------|:----|:------|:-------
-v1.x   | 1.x | 1.0-x | 1.0-x
+v1.x   | 1.x / 2.x | 1.0-x / 2.1-x / 2.2-x | 1.0-x
 v0.2.x | 0.x | 0.1-x | 0.1-x
 
 # Install
