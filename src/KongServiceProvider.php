@@ -3,6 +3,7 @@
 namespace DouglasDC3\Kong;
 
 use DouglasDC3\Kong\Http\HttpClient;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
 class KongServiceProvider extends ServiceProvider
@@ -18,14 +19,18 @@ class KongServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/kong.php', 'kong');
 
-        $this->app->singleton(Kong::class, function ($app) {
-            return new Kong(new HttpClient(
+        $this->app->bind(HttpClient::class, function () {
+            return new HttpClient(
                 config('kong.base_uri'),
                 [
                     'query' => config('kong.query', []),
                     'headers' => config('kong.headers', [])
                 ]
-            ));
+            );
+        });
+
+        $this->app->singleton(Kong::class, function (Application $app) {
+            return new Kong($app->make(HttpClient::class));
         });
     }
 }
