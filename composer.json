@@ -1,5 +1,5 @@
 {
-    "name": "douglasdc3/laravel-kong",
+    "name": "douglasdc3/kong",
     "description": "A Kong API Manager Admin client. Includes Laravel integration.",
     "keywords": [
         "laravel",
